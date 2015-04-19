@@ -1,51 +1,34 @@
-// Suite Libs
-var express = require('express');
- 		logger  = require('morgan');
- 		cheerio = require('cheerio');
- 		bodyParser = require('body-parser');
-		request = require('request');
-// var models  = require('./models');
 
-// Models
+var application_root = __dirname,
+		express 				 = require('express');
+ 		logger  		     = require('morgan');
+ 		cheerio 		     = require('cheerio');
+ 		bodyParser 	     = require('body-parser');
+ 		path						 = require('path');
+		request			     = require('request');
+
+		// userRouter  		 = require('./routers/user_router.js'),
+		listingRouter 	 = require('./routers/listing_router.js')
 
 
-// Express application
+
+
 var app = express();
 
-// Middleware
+
 app.use(logger('dev'));
-app.use(bodyParser());
-// app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({extended: false }));
+app.use( bodyParser.json() );
+app.use( express.static( path.join( application_root, 'public' )))
 
-// request({
-// 	url:'http://newyork.craigslist.org/mnh/sub/4983394679.html',
-// 	method: 'GET'
-// }, function(err, res, body) {
-// 	  var $ = cheerio.load(body)
-// }
-// )
 
+app.use('/testing', listingRouter);
 
 
 app.get('/testing', function(req, res){
-	request({
-		  url: 'http://newyork.craigslist.org/mnh/sub/4983394679.html',
-		  method: 'GET'
-	}, function(error, response, body) {
-			var $ = cheerio.load(body);
-			var body = [];
-			var time = [];
-			$('#postingbody').each(function(i, elem){
-				body[i] = $(this).text();
-			});
-			$('.postinginfo, time').each(function(i, elem){
-				time[i] = $(this).text();
-			});
-			res.send(body + time);
-	});
+	
 });
 
-app.get('')
 
 app.listen(3000, function(){
 	console.log('Listening off 3000....')
