@@ -25,9 +25,9 @@ app.use( express.static( path.join( application_root, 'public' )))
 app.use('/testing', listingRouter);
 
 
-app.get('/testing', function(req, res){
+// app.get('/testing', function(req, res){
 	
-});
+// });
 
 
 app.listen(3000, function(){

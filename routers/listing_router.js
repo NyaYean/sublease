@@ -6,7 +6,7 @@ var express          = require('express'),
 var listingRouter = express.Router()
    
 
-listingRouter.get('/testing', function(req, res){
+listingRouter.get('/', function(req, res){
 	request({
 		  url: 'http://newyork.craigslist.org/mnh/sub/4979262126.html',
 		  method: 'GET'
@@ -22,6 +22,8 @@ listingRouter.get('/testing', function(req, res){
 			});
 			res.send(body + time);
 	});
+})
+
+listingRouter.get('/parse', )
 
 module.exports = listingRouter;
-})
