@@ -39,17 +39,18 @@ listingRouter.get('/', function(req,res){
 				var listingUrl = listing.link[0]
 				var listingDate = listing['dc:date'][0]
 				var listingTitle = listing.title[0]
-					console.log(listingTitle)
+					// console.log(listingTitle)
 
-					// request({
-					// 	url: listingUrl[0],
-					// 	method: 'GET',
-					// 	json: true
-					// }).on(error, function(err){
-					// 	console.log(err).on(success, function(){
-					// 		console.log("I suceeded!")
-					// 	})
-					// })
+					request({
+						url: console.log(listingUrl),
+						method: 'GET',
+						body:data,
+						json: true
+					}).on(error, function(err){
+						console.log(err).on(success, function(){
+							console.log("I suceeded!")
+						})
+					})
 			})
 		})
 
