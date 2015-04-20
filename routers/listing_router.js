@@ -49,13 +49,17 @@ listingRouter.get('/', function(req,res){
 						var $ = cheerio.load(body);
 			var body = [];
 			var time = [];
+			var city = [];
 			$('#postingbody').each(function(i, elem){
-				body[i] = $(this).text();
+				body[i] = $(this).text('May');
 			});
 			$('.postinginfo, time').each(function(i, elem){
 				time[i] = $(this).text();
 			});
-			console.log(body + time);
+			$('.housing, small').each(function(i, elem){
+				city[i] = $(this).text().slice(0,8)
+			})
+			console.log(body + city);
 					})
 			})
 		})
