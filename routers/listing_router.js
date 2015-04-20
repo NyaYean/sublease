@@ -42,14 +42,20 @@ listingRouter.get('/', function(req,res){
 					// console.log(listingTitle)
 
 					request({
-						url: console.log(listingUrl),
+						url: listingUrl,
 						method: 'GET',
-						body:data,
 						json: true
-					}).on(error, function(err){
-						console.log(err).on(success, function(){
-							console.log("I suceeded!")
-						})
+					},function(error,response,body){
+						var $ = cheerio.load(body);
+			var body = [];
+			var time = [];
+			$('#postingbody').each(function(i, elem){
+				body[i] = $(this).text();
+			});
+			$('.postinginfo, time').each(function(i, elem){
+				time[i] = $(this).text();
+			});
+			console.log(body + time);
 					})
 			})
 		})
