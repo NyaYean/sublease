@@ -41,6 +41,5 @@ listingRouter.get('/testing', function(req, res){
 
 });
 
-// listingRouter.get('/parse', )
 
 module.exports = listingRouter;
