@@ -14,6 +14,9 @@ module.exports = {
       username: {
         type: DataTypes.STRING
       },
+      password_digest: {
+        type: DataTypes.STRING
+      },
       sublease_term: {
         type: DataTypes.INTEGER
       },
@@ -23,11 +26,11 @@ module.exports = {
       location: {
         type: DataTypes.STRING
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE
       }
