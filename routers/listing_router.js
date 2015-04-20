@@ -1,12 +1,14 @@
 var express          = require('express'),
     models           = require('../models'),
     User  				 	 = models.users,
-    Event            = models.listings;
+    Listing          = models.listings;
+    craigslist			 = require('node-craigslist'); 
+    
 
 var listingRouter = express.Router()
    
 
-listingRouter.get('/', function(req, res){
+listingRouter.get('/onelisting', function(req, res){
 	request({
 		  url: 'http://newyork.craigslist.org/mnh/sub/4979262126.html',
 		  method: 'GET'
@@ -24,6 +26,21 @@ listingRouter.get('/', function(req, res){
 	});
 })
 
-listingRouter.get('/parse', )
+// listingRouter.get('/', function())
+
+listingRouter.get('/testing', function(req, res){
+	
+	var client = craigslist({city: 'seattle'}),
+		options = {category:'sublet'};
+		client.search('rooms', function(err, listings){
+			listings.forEach(function(listing){
+				console.log(listing)
+			});
+		});
+
+
+});
+
+// listingRouter.get('/parse', )
 
 module.exports = listingRouter;
