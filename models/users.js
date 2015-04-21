@@ -26,7 +26,10 @@ module.exports = function(sequelize, DataTypes) {
         isDate: {msg: 'Please enter a valid date'}
       }
     },
-
+    password_digest: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     location: {
       type: DataTypes.STRING,
       allowNull: false,

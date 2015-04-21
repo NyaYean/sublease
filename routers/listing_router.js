@@ -39,25 +39,29 @@ listingRouter.get('/', function(req,res){
 				var listingUrl = listing.link[0]
 				var listingDate = listing['dc:date'][0]
 				var listingTitle = listing.title[0]
-					// console.log(listingTitle)
-
+					console.log(listingTitle)
+					// var data: {
+					// 	//add attributes here ex: listingTitle
+					// }
 					request({
 						url: listingUrl,
 						method: 'GET',
+						// data:data,
 						json: true
 					},function(error,response,body){
 						var $ = cheerio.load(body);
 			var body = [];
 			var time = [];
 			var city = [];
+			var myRegExp = /[Mm]ay/
 			$('#postingbody').each(function(i, elem){
-				body[i] = $(this).text('May');
+				body[i] = $(this).text();
 			});
 			$('.postinginfo, time').each(function(i, elem){
 				time[i] = $(this).text();
 			});
 			$('.housing, small').each(function(i, elem){
-				city[i] = $(this).text().slice(0,8)
+				city[i] = $(this).text().slice(0,20)
 			})
 			console.log(body + city);
 					})

@@ -30,15 +30,13 @@ app.use(session({
 	resave: false
 }));
 
+//Callback
 
-app.use('/listings', listingRouter);
+
+app.use('/listing', listingRouter);
 app.use('/user', userRouter);
 
-
-// app.get('/testing', function(req, res){
-	
-// });
-
+module.exports = app;
 
 app.listen(3000, function(){
 	console.log('Listening off 3000....')
