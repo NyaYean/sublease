@@ -11,6 +11,7 @@ var restrictAccess = function(req, res, next) {
   sessionID === reqID ? next() : res.status(401).send({ err: 401, msg: 'YOU SHALL NOT PASS!'});
 }
 
+//Debugging stuff
 userRouter.get('/debug', function(req, res) {
 	res.send(req.session)
 })
@@ -20,6 +21,8 @@ userRouter.get('/current_user', function(req, res) {
 });
 
 
+
+//CRUD routes
 userRouter.get('/', function(req, res){
 	User
 	  .findAll({include: Listing })

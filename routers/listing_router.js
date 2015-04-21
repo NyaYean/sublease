@@ -5,6 +5,7 @@ var express          = require('express'),
     Listing          = models.listings;
     craigslist			 = require('node-craigslist');
     parseString			 = require('xml2js').parseString;
+    async						 = require('async');
     
 
 var listingRouter = express.Router();
@@ -53,17 +54,30 @@ listingRouter.get('/', function(req,res){
 			var body = [];
 			var time = [];
 			var city = [];
+			var results = [];
+			var months = ['L'];
+			var abvMonths = ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 			var myRegExp = /[Mm]ay/
 			$('#postingbody').each(function(i, elem){
-				body[i] = $(this).text();
+				  body[i] = $(this).text();
+					var string = body[i].split(' ')
+				abvMonths.forEach(function(spmonths) {
+					if (string.indexOf(spmonths) !== -1){
+						results.push(body[i])
+					} else{
+						console.log("I don't work")
+					}
+				})
+
+				res.send(results)
 			});
 			$('.postinginfo, time').each(function(i, elem){
 				time[i] = $(this).text();
 			});
 			$('.housing, small').each(function(i, elem){
-				city[i] = $(this).text().slice(0,20)
+				city[i] = $(this).text();
 			})
-			console.log(body + city);
+			// res.send(body);
 					})
 			})
 		})

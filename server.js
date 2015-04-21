@@ -9,6 +9,7 @@ var application_root = __dirname,
 		bcrypt 					 = require('bcrypt');
 	  session 				 = require('express-session');
 	  craigslist			 = require('node-craigslist');
+	  async						 = require('async')
 	  // parseString			 = require('xm12js').parseString;
 
 		userRouter  		 = require('./routers/user_router.js'),
