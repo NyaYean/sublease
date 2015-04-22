@@ -29,9 +29,13 @@ var baseURL = 'http://newyork.craigslist.org/search/'
    
 
 listingRouter.get('/onelisting', function(req, res){
+	var queryParams = req.query;
+	console.log(req.query)
 	request({
-		  url: 'http://newyork.craigslist.org/mnh/sub/4979262126.html',
-		  method: 'GET'
+		  url: 'http://newyork.craigslist.org/search/sub?',
+		  method: 'GET',
+		  json: true,
+		  qs: queryParams
 	}, function(error, response, body) {
 			var $ = cheerio.load(body);
 			var body = [];
@@ -42,9 +46,32 @@ listingRouter.get('/onelisting', function(req, res){
 			$('.postinginfo, time').each(function(i, elem){
 				time[i] = $(this).text();
 			});
-			res.send(body + time);
+			res.send(listings);
 	});
 })
+
+
+listingRouter.get('/basic', function(req, res){
+	var xml = 'http://newyork.craigslist.org/search/sub?hasPic=1&query=short%20term%20-long&format=rss'
+
+	request.get(xml, function(error, response, body){
+		parseString(body, function (err, result){
+			
+			var listings = result['rdf:RDF'].item
+			listings.forEach(function(listing){
+				var listingURL = listing.link[0];
+				 request({
+				 	url: listingURL,
+				 	method: 'GET',
+				 	json: true
+				 })	
+			})
+		})
+	})
+})
+
+
+
 
 listingRouter.get('/', function(req,res){
 		var xml = 'http://newyork.craigslist.org/search/sub?hasPic=1&query=short%20term%20-long&format=rss'
@@ -95,7 +122,7 @@ listingRouter.get('/', function(req,res){
 			$('.content').each(function(i, elem){
 				row[i] = $(this).text()
 			})
-			res.send(row);
+			res.send(response);
 					})
 			})
 		})
@@ -103,6 +130,8 @@ listingRouter.get('/', function(req,res){
 	})
 	
 })
+
+
 
 // listingRouter.get('/testing', function(req, res){
 	
