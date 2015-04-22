@@ -52,19 +52,23 @@ listingRouter.get('/onelisting', function(req, res){
 
 
 listingRouter.get('/basic', function(req, res){
-	var xml = 'http://newyork.craigslist.org/search/sub?hasPic=1&query=short%20term%20-long&format=rss'
+	var xml = 'http://newyork.craigslist.org/search/sub?bathrooms=0&bedrooms=0&maxAsk=700&format=rss'
 
 	request.get(xml, function(error, response, body){
 		parseString(body, function (err, result){
 			
 			var listings = result['rdf:RDF'].item
 			listings.forEach(function(listing){
-				var listingURL = listing.link[0];
+				var listingURL = listing.link;
+				console.log([listingURL])
 				 request({
 				 	url: listingURL,
 				 	method: 'GET',
 				 	json: true
-				 })	
+				 },function(error, response, body){
+				 	  res.send(body)
+				 })
+				 	
 			})
 		})
 	})

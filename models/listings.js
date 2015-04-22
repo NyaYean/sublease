@@ -5,43 +5,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    location: {
-      type: DataTypes.STRING,
+    url: {
+      type: DataTypes.TEXT,
       allowNull: false
-    },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        isNumeric: {msg: 'Please enter a price'}
-      }
-    },
-    sublease_term: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        isNumeric: {msg: 'Please enter sublease term in numbers'}
-      }
-    },
-    start_date: {
-      type: DataTypes.DATE,
-      validate: {
-        isDate: {msg: 'Not a valid date'}
-      }
-    },
-    bedrooms: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        isDate: {msg: 'Please enter numbers only'}
-      }
-    },
-    bathrooms: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        isDate: {msg: 'Please enter numbers only'}
-      }
     }
   }, {
 

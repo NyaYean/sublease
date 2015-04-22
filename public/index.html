@@ -14,6 +14,40 @@
    <script src="js/app.js"></script>
 </head>
 <body>
+	<div id='container'>
+		<header>
+			<h1>Subleaser</h1>
+		</header>
+
+		<div id='user-access'></div>
+		<hr>
+		<div id='user-accounts'></div>
+		<div id='edit'></div>
+		<div id='show-listings'></div>
+
+		<template id="create-user-template">
+			<input type="text" id="create-name" placeholder="Name">
+			<br>
+			<input type="text" id="create-username" placeholder="Username">
+			<br>
+			<input type="text" id="create-sublease-term" placeholder="Sublease Term">
+			<br>
+			<input type="password" id="login-password" placeholder="password">
+			<br>
+			<button id="create-button">Create Account</button>
+		</template>
+
+		<template id="login-template">
+			<input type="text" id="login-username" placeholder="username">
+			<input type="password" id="login-password" placeholder="password">
+			<button id="login-button">Log In</button><br>
+			<h2>Not a user...sign up!!!</h2>
+			<button id="sign-up">Sign Up</button>
+		</template>
 	
+	<template id="user-display-template">
+		<h2>Welcome {{username}}</h2>
+		<div class='overview' id='{{username}}' data-accountID={{id}}>
+
 </body>
 </html>

@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlpha: {msg: 'Only include letters in your name'}
+        isAlpha: true
       }
     }, 
     username: {
@@ -19,28 +19,10 @@ module.exports = function(sequelize, DataTypes) {
         isNumeric: true
       }
     }, 
-    move_in_date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      validate: {
-        isDate: {msg: 'Please enter a valid date'}
-      }
-    },
     password_digest: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isIn: {
-          args: [['NY']],
-          msg: "Only in NY...more places to come soon."
-        }
-      }
-    } 
-
+    }
   }, {
 
     underscored: true,
