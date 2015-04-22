@@ -20,12 +20,6 @@ module.exports = {
       sublease_term: {
         type: DataTypes.INTEGER
       },
-      move_in_date: {
-        type: DataTypes.DATE
-      },
-      location: {
-        type: DataTypes.STRING
-      },
       created_at: {
         allowNull: false,
         type: DataTypes.DATE

@@ -11,31 +11,8 @@ module.exports = {
       title: {
         type: DataTypes.STRING
       },
-      location: {
-        type: DataTypes.STRING
-      },
-      price: {
-        type: DataTypes.INTEGER
-      },
-      sublease_term: {
-        type: DataTypes.INTEGER
-      },
-      start_date: {
+      url: {
         type: DataTypes.TEXT
-      },
-      bedrooms: {
-        type: DataTypes.INTEGER
-      },
-      bathrooms: {
-        type: DataTypes.INTEGER
-      },
-      created_at: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      updated_at: {
-        allowNull: false,
-        type: DataTypes.DATE
       }
     }).done(done);
   },
