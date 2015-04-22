@@ -9,7 +9,23 @@ var express          = require('express'),
 
 var listingRouter = express.Router();
 
-var pageList = []
+// var pageList = []
+
+// var longTermListings = ['http://newyork.craigslist.org/search/sub?hasPic=1&query=long%20term%20-short&format=rss']
+
+
+// var bathroomResults = ['http://newyork.craigslist.org/search/sub?bathrooms=1&format=rss',
+// 'http://newyork.craigslist.org/search/sub?bathrooms=2&format=rss','http://newyork.craigslist.org/search/sub?bathrooms=3&format=rss',
+// 'http://newyork.craigslist.org/search/sub?bathrooms=4&format=rss','http://newyork.craigslist.org/search/sub?bathrooms=5&format=rss',
+// 'http://newyork.craigslist.org/search/sub?bathrooms=6&format=rss']
+
+// var bedroomResults = ['http://newyork.craigslist.org/search/sub?bedrooms=1&format=rss','http://newyork.craigslist.org/search/sub?bedrooms=2&format=rss',
+// 'http://newyork.craigslist.org/search/sub?bedrooms=3&format=rss','http://newyork.craigslist.org/search/sub?bedrooms=4&format=rss','http://newyork.craigslist.org/search/sub?bedrooms=5&format=rss',
+// 'http://newyork.craigslist.org/search/sub?bedrooms=6&format=rss', 'http://newyork.craigslist.org/search/sub?bedrooms=7&format=rss','http://newyork.craigslist.org/search/sub?bedrooms=8&format=rss']
+
+// var priceResults = ['http://newyork.craigslist.org/search/sub?hasPic=1&maxAsk=800&query=short%20term%20-long&format=rss']
+
+var baseURL = 'http://newyork.craigslist.org/search/'
    
 
 listingRouter.get('/onelisting', function(req, res){
@@ -31,15 +47,19 @@ listingRouter.get('/onelisting', function(req, res){
 })
 
 listingRouter.get('/', function(req,res){
-		var xml = 'http://newyork.craigslist.org/search/sub?format=rss'
+		var xml = 'http://newyork.craigslist.org/search/sub?hasPic=1&query=short%20term%20-long&format=rss'
 	request.get(xml, function(error, response, body){
 		parseString(body, function (err, result){
 			var listings = result['rdf:RDF'].item
 			listings.forEach(function(listing){
+				// res.send(listing)
 				var listingUrl = listing.link[0]
 				var listingDate = listing['dc:date'][0]
 				var listingTitle = listing.title[0]
-					console.log(listingTitle)
+				// var listingPic = {listing:enc:enclosure:resource}
+				// console.log(listingPic)
+				// var listingImage = listing.
+					// console.log(listingTitle)
 					// var data: {
 					// 	//add attributes here ex: listingTitle
 					// }
@@ -53,7 +73,10 @@ listingRouter.get('/', function(req,res){
 			var body = [];
 			var time = [];
 			var city = [];
-			var myRegExp = /[Mm]ay/
+			var images = [];
+			var attributes = [];
+			var row = [];
+			// var myRegExp = /[Mm]ay/
 			$('#postingbody').each(function(i, elem){
 				body[i] = $(this).text();
 			});
@@ -61,9 +84,18 @@ listingRouter.get('/', function(req,res){
 				time[i] = $(this).text();
 			});
 			$('.housing, small').each(function(i, elem){
-				city[i] = $(this).text().slice(0,20)
+				city[i] = $(this).text()
 			})
-			console.log(body + city);
+			$('.carousel multiimage').each(function(i, elem){
+				images[i] = $(this).contents()
+			})
+			$('.attrgroup').each(function(i, elem){
+				attributes[i] = $(this).text()
+			})
+			$('.content').each(function(i, elem){
+				row[i] = $(this).text()
+			})
+			res.send(row);
 					})
 			})
 		})
