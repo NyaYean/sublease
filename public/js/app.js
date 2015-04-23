@@ -10,7 +10,7 @@ $(function(){
 	renderStart();
 
 	$('body').on('click','#sign-up', createUser)
-	$('body').on('click','#login-button', userView)
+	$('body').on('click','#login-button', login)
 
 });
 
@@ -37,8 +37,9 @@ var createUser = function(){
 			sublease_term: sublease_term,
 			password: password_digest
 		})
-		.done(function(){
+		.done(function(user){
 			alert("Thank you for creating an account");
+			renderUserAccounts(user)
 		})
 		.fail(function(){
 			alert('Please try again')
@@ -46,11 +47,12 @@ var createUser = function(){
 	})
 }
 
-var renderUserAccounts = function(){
-	console.log('Good')
+var renderUserAccounts = function(user){
+	$('#user-access').empty();
+	$('#user-access').append(userDisplayTemplate(user))
 }
 
-var userView = function(){
+var login = function(){
 	// $('#user-access').empty();
 	// $('#user-access').append(userDisplayTemplate);
 
@@ -59,7 +61,7 @@ var userView = function(){
 
 	$.post('/user/sessions', {
 		username: username,
-		password_digest: password_digest
+		password: password_digest
 	})
 	.done(renderUserAccounts)
 	.fail(function(response){
@@ -67,3 +69,10 @@ var userView = function(){
 		alert(err.err + ' - ' + err.msg);
 	});
 };
+
+var logout = function(){
+	$.ajax({
+		url: '/user/sessions',
+		method:'DELETE'
+	})
+}

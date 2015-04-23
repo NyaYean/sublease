@@ -109,6 +109,7 @@ userRouter.post('/sessions', function(req, res) {
 });
 
 userRouter.delete('/sessions', function(req, res){
+	console.log(req.session)
 	delete req.session.currentUser
 	res.send({ msg: 'Successfully logged out' });
 });
