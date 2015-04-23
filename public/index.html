@@ -46,8 +46,49 @@
 		</template>
 	
 	<template id="user-display-template">
-		<h2>Welcome {{username}}</h2>
+		<h2>Welcome {{username}}</h2> 
+
+		<br>
+		<span class="form-label">Choose Number of Bedrooms: </span>
+			<select id = 'bedroom-list'>
+				<option disabled> ---0---</option>
+				  <option>1</option>
+				  <option>2</option>
+				  <option>3</option>
+				  <option>4</option>
+					<option>5</option>
+			</select>
+		<br>
+		<span class="form-label">Choose Number of Bathrooms: </span>
+			<select id = 'bathroom-list'>
+				<option disabled> ---0---</option>
+				  <option>1</option>
+				  <option>2</option>
+				  <option>3</option>
+				  <option>4</option>
+			</select>
+		<br>
+		<span class="form-label">Choose Max Price Range</span>
+			<select id = 'price-list'>
+				<option disabled> ---700---</option>
+				  <option>800</option>
+				  <option>900</option>
+				  <option>1000</option>
+				  <option>1500</option>
+					<option>2000</option>
+			</select>
+		<br>
+		<span class="form-label">Select Short Term or Long Term </span>
+			<select id = 'bedroom-list'>
+				<option disabled> ---0---</option>
+				  <option>Short Term</option>
+				  <option>Long Term</option>
+			</select>
+
+		<button id='search-button'>Search</button>
+		<button id='logout-button'>Log Out</button>
 		<div class='overview' id='{{username}}' data-accountID={{id}}>
+	</template>
 
 </body>
 </html>

@@ -13,6 +13,18 @@ module.exports = {
       },
       url: {
         type: DataTypes.TEXT
+      },
+      pictures: {
+        type: DataTypes.TEXT
+      },
+      date: {
+        type: DataTypes.STRING
+      },
+      links: {
+        type: DataTypes.STRING
+      },
+      description: {
+        type: DataTypes.STRING
       }
     }).done(done);
   },

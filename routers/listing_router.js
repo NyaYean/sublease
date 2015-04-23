@@ -46,30 +46,51 @@ listingRouter.get('/onelisting', function(req, res){
 			$('.postinginfo, time').each(function(i, elem){
 				time[i] = $(this).text();
 			});
-			res.send(listings);
+			res.send(listing);
 	});
 })
 
 
 listingRouter.get('/basic', function(req, res){
-	var xml = 'http://newyork.craigslist.org/search/sub?bathrooms=0&bedrooms=0&maxAsk=700&format=rss'
-
+	var xml = 'http://newyork.craigslist.org/search/sub?hasPic=1&query=short%20term%20-long&format=rss'
+	var links = [];
+	var pictures = [];
+	var listingDates = [];
+	var listingTitles = [];
+	var descriptions = [];
 	request.get(xml, function(error, response, body){
 		parseString(body, function (err, result){
-			
+			// var titles = result.title
 			var listings = result['rdf:RDF'].item
-			listings.forEach(function(listing){
-				var listingURL = listing.link;
-				console.log([listingURL])
-				 request({
-				 	url: listingURL,
-				 	method: 'GET',
-				 	json: true
-				 },function(error, response, body){
-				 	  res.send(body)
-				 })
+			
+			  listings.forEach(function(listing){
+			  	var listingTitle = listing.title[0]
+			  	var listingDate = listing['dc:date'][0]
+			  	var picture = listing["enc:enclosure"][0].$.resource
+			  	var description = listing.description[0]
+			  	var link = listing.link[0]
+			  	links.push(link)
+			  	descriptions.push(description)
+			  	pictures.push(picture)
+			  	listingDates.push(listingDate)
+			  	listingTitles.push(listingTitle)
+					// res.send(listing)
+			  })
+			  res.send(listingTitles)
+			
+			// var listings = result['rdf:RDF'].item
+			// listings.forEach(function(listing){
+			// 	// var listingURL = listing.link;
+			// 	console.log(listing)
+				 // request({
+				 // 	url: listingURL[0],
+				 // 	method: 'GET',
+				 // 	json: true
+				 // },function(error, response, body){
+				 // 	  res.send(body)
+				 // })
 				 	
-			})
+			// })
 		})
 	})
 })
@@ -83,6 +104,7 @@ listingRouter.get('/', function(req,res){
 		parseString(body, function (err, result){
 			var listings = result['rdf:RDF'].item
 			listings.forEach(function(listing){
+				console.log(listing)
 				// res.send(listing)
 				var listingUrl = listing.link[0]
 				var listingDate = listing['dc:date'][0]
@@ -126,7 +148,7 @@ listingRouter.get('/', function(req,res){
 			$('.content').each(function(i, elem){
 				row[i] = $(this).text()
 			})
-			res.send(response);
+			res.send(images);
 					})
 			})
 		})
