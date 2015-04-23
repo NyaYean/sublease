@@ -11,6 +11,7 @@ $(function(){
 
 	$('body').on('click','#sign-up', createUser)
 	$('body').on('click','#login-button', login)
+	$('body').on('click','#')
 
 });
 
