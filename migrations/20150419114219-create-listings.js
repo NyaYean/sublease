@@ -20,9 +20,6 @@ module.exports = {
       date: {
         type: DataTypes.STRING
       },
-      links: {
-        type: DataTypes.STRING
-      },
       description: {
         type: DataTypes.STRING
       }
